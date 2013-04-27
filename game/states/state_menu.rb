@@ -8,11 +8,11 @@ class StateMenu < Chingu::GameState
 
     # メニューの設定
     @menus = [
-      { "text" => "ダンジョンに潜る", "state" => :state_dungeon},
-      { "text" => "宿屋に泊まる", "state" => :state_inn},
-      { "text" => "商店に行く", "state" => :state_shop},
-      { "text" => "お城に行く", "state" => :state_castle},
-      { "text" => "街はずれに行く", "state" => :state_make}
+      { "text" => "ダンジョンに潜る", "state" => :StateDungeon},
+      { "text" => "宿屋に泊まる", "state" => :StateCharacter},
+      { "text" => "商店に行く", "state" => :StateShop},
+      { "text" => "お城に行く", "state" => :StateCastle},
+      { "text" => "街はずれに行く", "state" => :StateMake}
     ]
 
     # テキストの設定
@@ -36,7 +36,8 @@ class StateMenu < Chingu::GameState
     self.input = {
     :escape => :close_game,
     :up => :menu_up,
-    :down => :menu_down
+    :down => :menu_down,
+    :return => :select_menu
     }
   end
 
@@ -73,5 +74,11 @@ class StateMenu < Chingu::GameState
 
     @menu_id = 0 if @menu_id < 0
     @menu_id = (@menus.size - 1) if (@menu_id > (@menus.size - 1))
+
+  end
+
+  # メニュー決定
+  def select_menu
+    push_game_state(Kernel.const_get(@menus[@menu_id]["state"]))
   end
 end
