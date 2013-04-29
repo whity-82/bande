@@ -1,6 +1,4 @@
 #coding:utf-8
-require "./game/require.rb"
-
 class StateMenu < Chingu::GameState
 
   def initialize
@@ -16,15 +14,21 @@ class StateMenu < Chingu::GameState
     ]
 
     # テキストの設定
-    @title = Chingu::Text.create(:text=>"Bande", :x=>10, :y=>0, :size=>(FONT_SIZE * 1.5).to_i, :color => Gosu::Color::RED)
+    @title = Chingu::Text.create(:x=>10, :y=>0, :size => FONT_SIZE, :zorder => ZOrder::Background, :color => Gosu::Color::RED)
+    @title.text = <<EOS
+===============================================
+  Bande (the *Band Essential)       2013.04.26
+===============================================
+EOS
 
     @menu_texts = Array.new
     @menus.size.times do |i|
       @menu_texts[i] = Chingu::Text.create(
-        :text=> i.to_s + ". " + @menus[i]["text"],
-        :x=>30,
-        :y=> (FONT_SIZE * (2 + i)).to_i,
-        :size=>FONT_SIZE,
+        :text => i.to_s + ". " + @menus[i]["text"],
+        :x => 30,
+        :y => FONT_SIZE * (@title.text.count("¥n") + i),
+        :zorder => ZOrder::Front,
+        :size => FONT_SIZE,
         :color => Gosu::Color::WHITE
       )
     end
