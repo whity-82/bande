@@ -50,9 +50,6 @@ class StateMenu < Chingu::GameState
   end
 
   def draw
-    # タイトル描画
-    @title.draw
-
     # メニュー描画
     @menu_texts.each_index do |i|
       @menu_texts[i].color = (@menu_id == i) ? Gosu::Color::CYAN : Gosu::Color::WHITE
