@@ -3,7 +3,7 @@ require "./game/require.rb"
 
 class StateMenu < Chingu::GameState
 
-  def setup
+  def initialize
     super
 
     # メニューの設定
@@ -32,12 +32,16 @@ class StateMenu < Chingu::GameState
     # 選択中メニュー
     @menu_id = 0
 
+  end
+
+  def setup
+    super
     # キー入力イベントの定義
     self.input = {
-    :escape => :close_game,
-    :up => :menu_up,
-    :down => :menu_down,
-    :return => :select_menu
+      :escape => :close_game,
+      :up => :menu_up,
+      :down => :menu_down,
+      :return => :select_menu
     }
   end
 

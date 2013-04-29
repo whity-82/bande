@@ -3,12 +3,16 @@ require "./game/require.rb"
 
 class StateCharacter < Chingu::GameState
 
-  def setup
+  def initialize
     super
 
     # テキストの設定
     @title = Chingu::Text.create(:text=>"ステータス画面", :x=>10, :y=>0, :size=>(FONT_SIZE * 1.5).to_i, :color => Gosu::Color::RED)
 
+  end
+
+  def setup
+    super
     # キー入力イベントの定義
     self.input = {
       :escape => :pop_game_state

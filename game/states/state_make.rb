@@ -2,7 +2,7 @@
 require "./game/require.rb"
 
 class StateMake < Chingu::GameState
-  def setup
+  def initialize
     super
 
     $log.error "未実装クラス:" + self.class.name
